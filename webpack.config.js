@@ -3,40 +3,34 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.js",
+
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "index-bundle.js",
-    clean: true,
+    path: path.join(__dirname, "/dist"),
+    filename: "index-bundle.js"
   },
-  resolve: {
-    extensions: [".js", ".jsx"],
-  },
+
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.js$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            babelrc: false,          // Ép buộc không đọc file .babelrc ngoài
-            configFile: false,       // Ép buộc không đọc file babel.config.js ngoài
-            presets: [
-              ["@babel/preset-env", { targets: "defaults" }],
-              "@babel/preset-react"
-            ]
-          }
-        }
+        use: ["babel-loader"]
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
-      },
-    ],
+        use: ["style-loader", "css-loader"]
+      }
+    ]
   },
+
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/index.html",
-    }),
+      template: "./src/index.html"
+    })
   ],
+
+  devServer: {
+    static: "./dist",
+    hot: true
+  }
 };
