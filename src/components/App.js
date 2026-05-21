@@ -1,17 +1,28 @@
 import React, { Component } from "react";
-import HelloWorld from "./HelloWorld";
-
+import Person from "../models/Person.js"; 
+import HelloWorld from "./HelloWorld.js"; 
 import '../styles/App.css';
 
 class App extends Component {
-    render() {
-        return (
-            <div>
-                <h1>My React App!</h1>
-                <HelloWorld />
-            </div>
-        );
-    }
+  constructor(props) {
+    super(props);
+    
+    this.user = new Person("Phuc", 22);
+  }
+
+  render() {
+    return (
+      <div style={{ textAlign: 'center', marginTop: '50px' }}>
+        <h1>My React App!</h1>
+        
+        <HelloWorld />
+
+        <p style={{ fontSize: '20px', color: 'darkblue', marginTop: '20px' }}>
+          {this.user.sayHello()}
+        </p>
+      </div>
+    );
+  }
 }
 
 export default App;
